@@ -1,0 +1,28 @@
+
+  .nav {
+    display: block;
+    border: 0;
+    margin:0;
+    padding:0;
+
+    > li {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px;
+
+      > a {
+        display: inline-block;
+        padding: 5px 20px;
+        border: 0;
+        background-color: #e6e6e6;
+        color: #000;
+
+        &.active {
+          background-color: #fff;
+        }
+        &:hover {
+          background-color: #e9e9e9;
+        }
+      }
+    }
+  }
