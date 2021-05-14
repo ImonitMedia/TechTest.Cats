@@ -1,23 +1,30 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { favouriting, scoring } from "../../services";
-import { Loading } from "../";
+import {
+  getFavourite,
+  getVotes,
+  deleteFavourite,
+  addFavourite,
+  actionVote,
+  IImageData
+} from "../utils";
+import { Loading } from "./Loading";
 import "./Item.scss";
 
 export function Item(props: IProps) {
-  const [favouriteId, setFavouriteId] = useState<number>(undefined);
-  const [score, setScore] = useState<any>(0);
+  const [favouriteId, setFavouriteId] = useState<number | null>(null);
+  const [score, setScore] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<string>("Loading your cat...");
   const { item } = props;
   const { id: image_id, sub_id } = item;
 
   function getInitial() {
     const fetchData = async () => {
-      const scoreRes = await scoring.getScore();
+      const scoreRes = await getVotes();
       setScore(scoreRes);
 
-      const favouriteRes = await favouriting.getFavourite(image_id);
+      const favouriteRes = await getFavourite(image_id);
       if (favouriteRes) setFavouriteId(favouriteRes.id);
-      setIsLoading(undefined);
+      setIsLoading("");
     };
 
     fetchData();
@@ -26,12 +33,12 @@ export function Item(props: IProps) {
   useEffect(getInitial, [image_id, sub_id]);
 
   async function setVote(value: number) {
-    const res = await scoring.setVote(image_id, value);
+    const res = await actionVote(image_id, value);
 
     if (res) {
-      const scoreRes = await scoring.getScore();
+      const scoreRes = await getVotes();
       setScore(scoreRes);
-      setIsLoading(undefined);
+      setIsLoading("");
     }
   }
 
@@ -49,16 +56,16 @@ export function Item(props: IProps) {
 
   async function setFavourite() {
     setIsLoading("Favouriting your cat...");
-    const res = await favouriting.setFavourite(image_id);
+    const res = await addFavourite(image_id);
     if (res.message === "SUCCESS") setFavouriteId(res.id);
-    setIsLoading(undefined);
+    setIsLoading("");
   }
 
   async function removeFavourite() {
     setIsLoading("Removing favourite...");
-    const res = await favouriting.removeFavourite(favouriteId);
+    const res = await deleteFavourite(favouriteId);
     if (res.message === "SUCCESS") setFavouriteId(res.id);
-    setIsLoading(undefined);
+    setIsLoading("");
   }
 
   return (
@@ -87,17 +94,5 @@ export function Item(props: IProps) {
 }
 
 interface IProps {
-  item: Item;
-}
-
-export interface Item {
-  breeds: [];
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-  sub_id: string;
-  created_at: string;
-  original_filename: string;
-  breed_ids: [] | null;
+  item: IImageData;
 }

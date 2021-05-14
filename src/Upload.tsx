@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { images } from "./services";
-import { Loading } from "./components";
+import { uploadImage } from "./utils";
+import { Loading } from "./components/Loading";
 import "./styles.scss";
 
 export function Upload() {
-  const [file, setFile] = useState<File>(undefined);
-  const [imgURL, setImgURL] = useState<string>(undefined);
-  const [result, setResult] = useState<"success" | "no-file">(undefined);
+  const [file, setFile] = useState<File | null>(null);
+  const [imgURL, setImgURL] = useState<string>("");
+  const [result, setResult] = useState<Results>("unset");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -16,7 +16,7 @@ export function Upload() {
     if (file) {
       setIsLoading(true);
       const fetchData = async () => {
-        const res = await images.upload(file);
+        const res = await uploadImage(file);
         setResult("success");
         setImgURL(res.url);
         setIsLoading(false);
@@ -33,26 +33,28 @@ export function Upload() {
   }
 
   function clear() {
-    setFile(undefined);
-    setResult(undefined);
-    setImgURL(undefined);
+    setFile(null);
+    setResult("unset");
+    setImgURL("");
   }
 
   return (
     <div className="upload">
       <h1>Upload</h1>
 
+      <p>Please upload a new cat</p>
+      {result === "no-file" && (
+        <p className="error">Please specify a file to upload</p>
+      )}
       <form onSubmit={onSubmit}>
-        <p>Please upload a new cat</p>
-        {result === "no-file" && (
-          <p className="error">Please specify a file to upload</p>
-        )}
-        <p>
-          <input type="file" onClick={clear} onChange={onChange} />
-        </p>
-        <p>
-          <button type="submit">Upload</button>
-        </p>
+        <fieldset>
+          <div className="field-row">
+            <input type="file" onClick={clear} onChange={onChange} />
+          </div>
+          <div className="field-row">
+            <button type="submit">Upload</button>
+          </div>
+        </fieldset>
       </form>
 
       <hr />
@@ -73,3 +75,5 @@ export function Upload() {
     </div>
   );
 }
+
+type Results = "success" | "no-file" | "unset";

@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import { HomePage } from "./HomePage";
-import { Nav } from "./components";
+import { Nav } from "./components/Nav";
 import { Upload } from "./Upload";
 import "./styles.scss";
 

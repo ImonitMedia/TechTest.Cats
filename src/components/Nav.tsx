@@ -18,7 +18,7 @@ export function Nav() {
 
   return (
     <ul className="nav">
-      {navItems.map((link) => (
+      {navItems.map((link: NavItem) => (
         <li key={link.title}>
           <Link
             to={link.url}

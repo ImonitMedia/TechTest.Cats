@@ -91,6 +91,15 @@ button {
   }
 }
 
+fieldset {
+  border: 1px solid silver;
+  padding: 10px 10px 0;
+
+  .field-row {
+    margin-bottom: 10px;
+  }
+}
+
 
 /**
  * LAYOUT
