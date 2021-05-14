@@ -7,11 +7,8 @@ class API {
     this.defaultHeaders = {
       "x-api-key": "DEMO-API-KEY"
     };
+    this.sub_id = "ct_test_cat2";
   }
-
-  /**
-   * ENDPOINT ACTIONS
-   */
 
   async get(url: string, headers?: {}) {
     const res = await axios.get(`${this.baseURL}${url}`, {
@@ -23,7 +20,7 @@ class API {
     return res.data;
   }
 
-  async post(url: string, headers?: {}, body?: {}) {
+  async post(url: string, body?: {}, headers?: {}) {
     const res = await axios.post(`${this.baseURL}${url}`, body, {
       headers: {
         ...this.defaultHeaders,
@@ -33,34 +30,14 @@ class API {
     return res.data;
   }
 
-  /**
-   * DATA ACTIONS
-   */
-
-  async upload() {}
-
-  async favourite() {}
-
-  async fetch() {
-    return this.get("/images");
-  }
-
-  async getScore(sub_id: string) {
-    return await this.get(`/votes?sub_id=${sub_id}`);
-  }
-
-  async setVote(image_id: string, sub_id: string, value: number) {
-    const headers = {
-      "Content-Type": "application/json"
-    };
-
-    const body = {
-      image_id,
-      sub_id,
-      value
-    };
-
-    return await this.post(`/votes`, headers, body);
+  async delete(url: string, headers?: {}) {
+    const res = await axios.delete(`${this.baseURL}${url}`, {
+      headers: {
+        ...this.defaultHeaders,
+        headers
+      }
+    });
+    return res.data;
   }
 }
 
@@ -69,9 +46,8 @@ export const api = new API();
 interface API {
   baseURL: "https://api.thecatapi.com/v1";
   defaultHeaders: {
-    headers: {
-      [x: string]: string;
-    };
+    [x: string]: string;
   };
+  sub_id: string;
   token: string;
 }
