@@ -1,0 +1,26 @@
+@import "styles/theme.scss";
+@import "styles/reset.scss";
+
+/**
+ * LAYOUT
+ */
+
+#root {
+  position: relative;
+  max-width: var(--root-width);
+  margin: auto;
+  border: 0;
+  min-height: 100%;
+}
+
+main {
+  margin-top: var(--main-top-spacing);
+  padding: var(--primary-guttering);
+}
+
+@include media-breakpoint-xl {
+  #root {
+    border: 1px solid var(--border-colour);
+    border-top: none;
+  }
+}

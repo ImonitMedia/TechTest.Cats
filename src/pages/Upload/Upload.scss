@@ -1,0 +1,19 @@
+@import "styles/mixins";
+
+.upload {
+  position: relative;
+
+  .uploaded-img {
+    display: block;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@include media-breakpoint-lg {
+  .upload {
+    .uploaded-img {
+      max-width: 75%;
+    }
+  }
+}

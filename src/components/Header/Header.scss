@@ -1,0 +1,26 @@
+@import "styles/mixins";
+
+.header {
+  position: var(--header-position);
+  top: 0;
+  width: 100%;
+  background-color: var(--panel-colour);
+  border-bottom: 1px solid var(--border-colour);
+  height: var(--header-height);
+  z-index: 10;
+
+  .title {
+    font-size: 2.2rem;
+    padding: 13px var(--primary-guttering) 0;
+    margin: 0;
+  }
+}
+
+@include media-breakpoint-xl {
+  .header {
+    .title {
+      font-size: 2.4rem;
+      padding-top: 15px;
+    }
+  }
+}

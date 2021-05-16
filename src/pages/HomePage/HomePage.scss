@@ -1,0 +1,9 @@
+.home-page {
+  position: relative;
+
+  .items {
+    display: grid;
+    gap: var(--column-gap);
+    grid-template-columns: var(--columns);
+  }
+}

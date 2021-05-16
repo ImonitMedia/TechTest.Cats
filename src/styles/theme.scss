@@ -1,0 +1,52 @@
+@import "styles/mixins";
+
+:root {
+  --border-colour: #e3e3e3;
+  --columns: 1fr;
+  --column-gap: 15px 15px;
+  --font-size-primary: 1.4rem;
+  --font-size-small: 1.2rem;
+  --header-height: 80px;
+  --header-position: fixed;
+  --main-top-spacing: calc(var(--header-height) + 1px);
+  --margin-bottom: 15px;
+  --panel-colour: #f3f3f3;
+  --primary-guttering: 15px;
+  --secondary-guttering: 5px;
+  --root-width: 1200px;
+  --tab-bg: rgba(255, 255, 255, 0.3);
+  --tab-active-bg: #fff;
+  --tab-hover-bg: rgba(255, 255, 255, 0.7);
+  --text-shadow: 0 0 15px #ff0000;
+}
+
+@include media-breakpoint-sm {
+  :root {
+    --columns: 1fr 1fr;
+  }
+}
+
+@include media-breakpoint-md {
+  :root {
+    --columns: 1fr 1fr 1fr;
+  }
+}
+
+@include media-breakpoint-lg {
+  :root {
+    --columns: 1fr 1fr 1fr 1fr;
+    --font-size-primary: 1.6rem;
+    --font-size-small: 1.4rem;
+    --primary-guttering: 15px;
+  }
+}
+
+@include media-breakpoint-xl {
+  :root {
+    --header-height: 90px;
+    --header-position: relative;
+    --main-top-spacing: 0;
+    --primary-guttering: 20px;
+    --secondary-guttering: 7px;
+  }
+}

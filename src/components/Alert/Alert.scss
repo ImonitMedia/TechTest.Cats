@@ -1,0 +1,49 @@
+%alerts {
+  padding: 0 var(--secondary-guttering) var(--secondary-guttering);
+  border-radius: var(--secondary-guttering);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: var(--margin-bottom);
+
+  &::before {
+    position: relative;
+    top: 1px;
+    content: "\2716";
+    color: white;
+    margin-right: 8px;
+    font-size: 2rem;
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 0 3px;
+  }
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.success {
+  @extend %alerts;
+  background-color: green;
+  border: 1px solid darkgreen;
+
+  &::before {
+    content: "\2714";
+  }
+}
+
+.error {
+  @extend %alerts;
+  background-color: red;
+  border: 1px solid darkred;
+
+  &::before {
+    content: "\2716";
+  }
+}

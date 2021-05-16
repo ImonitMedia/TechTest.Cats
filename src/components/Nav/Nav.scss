@@ -1,0 +1,56 @@
+@import "styles/mixins";
+
+.nav {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-bottom: 0;
+
+    > a {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 0;
+      background-color: var(--tab-bg);
+      color: #000;
+      border: 1px solid var(--border-colour);
+
+      &.active {
+        &,
+        &:hover,
+        &:focus {
+          background-color: var(--tab-active-bg);
+          font-weight: bold;
+          border-bottom: 1px solid var(--tab-active-bg);
+        }
+      }
+
+      &:hover {
+        background-color: var(--tab-hover-bg);
+        text-decoration: none;
+      }
+
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-xl {
+  .nav {
+    > li {
+      > a {
+        padding: 5px 15px;
+      }
+    }
+  }
+}
