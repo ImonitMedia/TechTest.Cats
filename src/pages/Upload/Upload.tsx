@@ -78,7 +78,11 @@ export function Upload() {
         <small>The image format must be JPG, PNG or GIF.</small>
       </p>
 
-      {error && <Alert message={error} type="error" />}
+      {error && (
+        <div data-testid="error-message">
+          <Alert message={error} type="error" />
+        </div>
+      )}
 
       <form onSubmit={onSubmit}>
         <fieldset>
@@ -119,12 +123,7 @@ export function Upload() {
           />
 
           <p>
-            <img
-              className="uploaded-img"
-              data-testid="uploaded-img"
-              src={imgURL}
-              alt=""
-            />
+            <img className="uploaded-img" src={imgURL} alt="" />
           </p>
         </>
       )}

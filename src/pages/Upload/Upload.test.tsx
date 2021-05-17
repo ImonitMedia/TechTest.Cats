@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  fireEvent,
-  render,
-  queryByTestId,
-  waitFor,
-  screen,
-} from "@testing-library/react";
+import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Upload } from "pages/Upload/Upload";
 
-const file = new File(["dummy content"], "example.jpg", { type: "image/jpeg" });
+const file = new File(["Dummy content"], "example.txt", { type: "text/plain" });
 
 describe("FileUploadField", () => {
   render(<Upload />);
@@ -20,11 +14,11 @@ describe("FileUploadField", () => {
     value: [file],
   });
 
-  test("Uploading an image", async () => {
+  test("Uploading an incorrect file type will trigger an error", async () => {
     fireEvent.change(fileUpload);
     fireEvent.click(formSubmit);
-    await waitFor(() => screen.getByTestId("uploaded-img"));
+    await waitFor(() => screen.getByTestId("error-message"));
 
-    expect(screen.getByTestId("uploaded-img")).toBeTruthy();
+    expect(screen.getByTestId("error-message")).toBeTruthy();
   });
 });
